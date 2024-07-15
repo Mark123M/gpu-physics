@@ -1,10 +1,9 @@
 #include "second.h"
-#include <iostream>
-#include "fstream"
+#include <fstream>
 
 void foo(int a) {
     std::ofstream MyFile("src/logs/filename.txt");
 
-    MyFile << "Hello World! what thenfucmijijijiji" << std::endl;
+    MyFile << "Changled log" << std::endl;
     MyFile.close();
 }
