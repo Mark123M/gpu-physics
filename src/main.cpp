@@ -20,6 +20,7 @@
 ********************************************************************************************/
 
 #include "raylib.h"
+#include "raymath.h"
 #include "second.h"
 
 #if defined(PLATFORM_WEB)
@@ -46,11 +47,12 @@ static void UpdateDrawFrame(void);          // Update and draw one frame
 int main()
 {
     //OutputDebugString("This works because this is a string.\n");
-    foo(5);
+    foo(10);
+    
     // Initialization
     //--------------------------------------------------------------------------------------
-    const int screenWidth = 800;
-    const int screenHeight = 450;
+    const int screenWidth = 1280;
+    const int screenHeight = 720;
 
     InitWindow(screenWidth, screenHeight, "raylib");
 
@@ -83,12 +85,22 @@ int main()
     return 0;
 }
 
+const Vector3 GLOBAL_UP{0, 1, 0};
+const Vector3 GLOBAL_RIGHT{1, 0, 0};
+const Vector3 GLOBAL_FORWARD{0, 0, 1};
+
 // Update and draw game frame
 static void UpdateDrawFrame(void)
 {
     // Update
     //----------------------------------------------------------------------------------
-    UpdateCamera(&camera, CAMERA_ORBITAL);
+    if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT) || GetMouseWheelMove() != 0) {
+        UpdateCamera(&camera, CAMERA_THIRD_PERSON);
+    } else if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
+        UpdateCamera(&camera, CAMERA_FREE);
+    } else if (IsKeyDown(KEY_C)) {
+        camera.target = Vector3Zero();
+    }
     //----------------------------------------------------------------------------------
 
     // Draw
@@ -101,11 +113,11 @@ static void UpdateDrawFrame(void)
 
             DrawCube(cubePosition, 2.0f, 2.0f, 2.0f, RED);
             DrawCubeWires(cubePosition, 2.0f, 2.0f, 2.0f, MAROON);
-            DrawGrid(10, 1.0f);
+            DrawGrid(50, 1.0f);
 
         EndMode3D();
 
-        DrawText("This is a raylib example", 10, 40, 20, DARKGRAY);
+        DrawText("Physics Sandbox", 10, 40, 20, DARKGRAY);
 
         DrawFPS(10, 10);
 
