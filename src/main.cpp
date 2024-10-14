@@ -21,7 +21,7 @@
 
 #include "raylib.h"
 #include "raymath.h"
-#include "second.h"
+#include "logger.h"
 #include "sphere.h"
 
 #if defined(PLATFORM_WEB)
@@ -48,7 +48,7 @@ static void UpdateDrawFrame(void);          // Update and draw one frame
 int main()
 {
     //OutputDebugString("This works because this is a string.\n");
-    foo(10);
+    logToFile("Hello World!");
     
     // Initialization
     //--------------------------------------------------------------------------------------
@@ -90,6 +90,11 @@ const Vector3 GLOBAL_UP{0, 1, 0};
 const Vector3 GLOBAL_RIGHT{1, 0, 0};
 const Vector3 GLOBAL_FORWARD{0, 0, 1};
 
+bool isPaused = false;
+float timestep = 1.f; // timestep in seconds
+
+Sphere s{1.f, 1.f, Vector3{0, 7, 0}, Vector3Zero(), 0.4f, 0.f, 0.f};
+
 static void updateCamera(void) {
     if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) && IsMouseButtonDown(MOUSE_BUTTON_RIGHT)) {
         UpdateCamera(&camera, CAMERA_FREE);
@@ -97,6 +102,24 @@ static void updateCamera(void) {
         UpdateCamera(&camera, CAMERA_THIRD_PERSON);
     } else if (IsKeyDown(KEY_C)) {
         camera.target = Vector3Zero();
+    }
+}
+
+static void updateScene(void) {
+    if (IsKeyPressed(KEY_R)) {
+        s.reset();
+    } else if (IsKeyPressed(KEY_P)) {
+        isPaused = !isPaused;
+    }
+}
+
+static void updateObjects(float deltaTime) {
+    if (isPaused) {
+        if (IsKeyPressed(KEY_F)) {
+            s.update(timestep);
+        }
+    } else {
+        s.update(deltaTime);
     }
 }
 
@@ -108,6 +131,9 @@ static void UpdateDrawFrame(void)
     // Update
     //----------------------------------------------------------------------------------
     updateCamera();
+    updateScene();
+    updateObjects(deltaTime);
+
     //----------------------------------------------------------------------------------
 
     // Draw
@@ -118,13 +144,18 @@ static void UpdateDrawFrame(void)
 
         BeginMode3D(camera);
 
-            DrawCube(cubePosition, 2.0f, 2.0f, 2.0f, RED);
-            DrawCubeWires(cubePosition, 2.0f, 2.0f, 2.0f, MAROON);
+            //DrawCube(cubePosition, 2.0f, 2.0f, 2.0f, RED);
+            //DrawCubeWires(cubePosition, 2.0f, 2.0f, 2.0f, MAROON);
+            s.draw();
+
             DrawGrid(50, 1.0f);
 
         EndMode3D();
 
         DrawText("Physics Sandbox", 10, 40, 20, DARKGRAY);
+        if (isPaused) {
+            DrawText("PAUSED", 10, 70, 40, RED);
+        }
 
         DrawFPS(10, 10);
 
