@@ -1,13 +1,25 @@
 #include "logger.h"
 #include <fstream>
 #include <iostream>
+#include <iomanip>
+#include <ctime>
+#include <sstream>
 
-void logToFile(std::string s) {
-    std::ofstream MyFile("src/logs/filename.txt", std::ios::app);
-    MyFile << s << std::endl;
-    MyFile.close();
+std::string FileLogger::getCurTimeString() {
+    auto t = std::time(nullptr);
+    auto tm = *std::localtime(&t);
+
+    std::ostringstream oss;
+    oss << std::put_time(&tm, "%H-%M-%S_%m-%d-%Y");
+    return oss.str();
 }
 
-void bar(int a) {
-    std::cout << "hello world" << std::endl;
+FileLogger::FileLogger(): myFile{"src/logs/physics_sandbox_" + getCurTimeString() + ".txt", std::ios::app} {}
+
+FileLogger::~FileLogger() {
+    myFile.close();
+}
+
+void FileLogger::logToFile(std::string s) {
+    myFile << s << std::endl;
 }

@@ -28,7 +28,6 @@
     #include <emscripten/emscripten.h>
 #endif
 #include <iostream>
-#include <fstream>
 #include <debugapi.h>
 
 //----------------------------------------------------------------------------------
@@ -46,10 +45,7 @@ static void UpdateDrawFrame(void);          // Update and draw one frame
 // Main entry point
 //----------------------------------------------------------------------------------
 int main()
-{
-    //OutputDebugString("This works because this is a string.\n");
-    logToFile("Hello World!");
-    
+{   
     // Initialization
     //--------------------------------------------------------------------------------------
     const int screenWidth = 1280;
@@ -86,12 +82,14 @@ int main()
     return 0;
 }
 
-const Vector3 GLOBAL_UP{0, 1, 0};
-const Vector3 GLOBAL_RIGHT{1, 0, 0};
-const Vector3 GLOBAL_FORWARD{0, 0, 1};
+FileLogger logger;
 
 bool isPaused = false;
 float timestep = 1.f; // timestep in seconds
+
+const Vector3 GLOBAL_UP{0, 1, 0};
+const Vector3 GLOBAL_RIGHT{1, 0, 0};
+const Vector3 GLOBAL_FORWARD{0, 0, 1};
 
 Sphere s{1.f, 1.f, Vector3{0, 7, 0}, Vector3Zero(), 0.4f, 0.f, 0.f};
 
@@ -117,6 +115,7 @@ static void updateObjects(float deltaTime) {
     if (isPaused) {
         if (IsKeyPressed(KEY_F)) {
             s.update(timestep);
+            logger.logToFile("timestep increased");
         }
     } else {
         s.update(deltaTime);
