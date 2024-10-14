@@ -15,8 +15,7 @@ public:
     void update(float deltaTime);
     void draw();
     void reset();
-    
-    friend std::ostream& operator<<(std::ostream& out, const Sphere &s);
+    std::string stringify();
 };
 
 #endif

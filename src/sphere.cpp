@@ -38,12 +38,10 @@ void Sphere::reset() {
     posPrev = pos0; 
 }
 
-std::ostream& operator<<(std::ostream& out, const Vector3 &v) {
-    out << "(" << v.x << ", " << v.y << ", " << v.z << ")" << std::endl;
-    return out;
+std::string to_string(const Vector3 &v) {
+    return "(" + std::to_string(v.x) + ", " + std::to_string(v.y) + ", " + std::to_string(v.z) + ")";
 }
 
-std::ostream& operator<<(std::ostream& out, const Sphere &s) {
-    out << "[SPHERE] -> radius: " << s.radius << ", mass: " << s.mass << ", pos: " << s.pos << ", vel: " << s.vel << std::endl;
-    return out;  
+std::string Sphere::stringify() {
+    return "[SPHERE] -> radius: " + std::to_string(radius) + ", mass: " + std::to_string(mass) + ", pos: " + to_string(pos) + ", vel: " + to_string(vel);
 }

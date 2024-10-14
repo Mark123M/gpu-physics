@@ -91,7 +91,7 @@ const Vector3 GLOBAL_UP{0, 1, 0};
 const Vector3 GLOBAL_RIGHT{1, 0, 0};
 const Vector3 GLOBAL_FORWARD{0, 0, 1};
 
-Sphere s{1.f, 1.f, Vector3{0, 7, 0}, Vector3Zero(), 0.4f, 0.f, 0.f};
+Sphere s{1.f, 1.f, Vector3{0, 100, 0}, Vector3{10, 0, 30}, 0.4f, 0.f, 0.f};
 
 static void updateCamera(void) {
     if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) && IsMouseButtonDown(MOUSE_BUTTON_RIGHT)) {
@@ -115,7 +115,7 @@ static void updateObjects(float deltaTime) {
     if (isPaused) {
         if (IsKeyPressed(KEY_F)) {
             s.update(timestep);
-            logger.logToFile("timestep increased");
+            logger.logToFile(s.stringify());
         }
     } else {
         s.update(deltaTime);

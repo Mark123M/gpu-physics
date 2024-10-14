@@ -9,7 +9,7 @@ public:
     FileLogger();
     ~FileLogger();
     std::string getCurTimeString();
-    void logToFile(std::string s);
+    void logToFile(const std::string &s);
 };
 
 #endif

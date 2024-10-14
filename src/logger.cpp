@@ -20,6 +20,6 @@ FileLogger::~FileLogger() {
     myFile.close();
 }
 
-void FileLogger::logToFile(std::string s) {
+void FileLogger::logToFile(const std::string &s) {
     myFile << s << std::endl;
 }
