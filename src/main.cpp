@@ -23,6 +23,7 @@
 #include "raymath.h"
 #include "logger.h"
 #include "sphere.h"
+#include "plane.h"
 
 #if defined(PLATFORM_WEB)
     #include <emscripten/emscripten.h>
@@ -87,11 +88,8 @@ FileLogger logger;
 bool isPaused = false;
 float timestep = 1.f; // timestep in seconds
 
-const Vector3 GLOBAL_UP{0, 1, 0};
-const Vector3 GLOBAL_RIGHT{1, 0, 0};
-const Vector3 GLOBAL_FORWARD{0, 0, 1};
-
-Sphere s{1.f, 1.f, Vector3{0, 100, 0}, Vector3{10, 0, 30}, 0.4f, 0.f, 0.f};
+Sphere s{1.f, 1.f, Vector3{0.f, 100.f, 0.f}, Vector3{10.f, 0.f, 30.f}, 0.4f, 0.f, 0.f};
+Plane p{Vector3Zero(), Vector3{1.f, 0.f, 0.f}, Vector3{0.f, 0.f, 1.f}, 12.f, 12.f};
 
 static void updateCamera(void) {
     if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) && IsMouseButtonDown(MOUSE_BUTTON_RIGHT)) {
@@ -146,6 +144,7 @@ static void UpdateDrawFrame(void)
             //DrawCube(cubePosition, 2.0f, 2.0f, 2.0f, RED);
             //DrawCubeWires(cubePosition, 2.0f, 2.0f, 2.0f, MAROON);
             s.draw();
+            p.draw();
 
             DrawGrid(50, 1.0f);
 
