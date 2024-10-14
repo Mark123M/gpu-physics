@@ -22,6 +22,7 @@
 #include "raylib.h"
 #include "raymath.h"
 #include "second.h"
+#include "sphere.h"
 
 #if defined(PLATFORM_WEB)
     #include <emscripten/emscripten.h>
@@ -89,18 +90,24 @@ const Vector3 GLOBAL_UP{0, 1, 0};
 const Vector3 GLOBAL_RIGHT{1, 0, 0};
 const Vector3 GLOBAL_FORWARD{0, 0, 1};
 
-// Update and draw game frame
-static void UpdateDrawFrame(void)
-{
-    // Update
-    //----------------------------------------------------------------------------------
-    if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT) || GetMouseWheelMove() != 0) {
-        UpdateCamera(&camera, CAMERA_THIRD_PERSON);
-    } else if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
+static void updateCamera(void) {
+    if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) && IsMouseButtonDown(MOUSE_BUTTON_RIGHT)) {
         UpdateCamera(&camera, CAMERA_FREE);
+    } else if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT) || GetMouseWheelMove() != 0) {
+        UpdateCamera(&camera, CAMERA_THIRD_PERSON);
     } else if (IsKeyDown(KEY_C)) {
         camera.target = Vector3Zero();
     }
+}
+
+// Update and draw game frame
+static void UpdateDrawFrame(void)
+{
+    float deltaTime = GetFrameTime();
+    
+    // Update
+    //----------------------------------------------------------------------------------
+    updateCamera();
     //----------------------------------------------------------------------------------
 
     // Draw
