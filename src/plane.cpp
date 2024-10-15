@@ -6,7 +6,9 @@ Plane::Plane(Vector3 origin, Vector3 dir1, Vector3 dir2, float width, float heig
     v2{Vector3Add(v1, Vector3Scale(dir2, height))}, v3{Vector3Add(origin, Vector3Scale(dir2, height))}, normal{Vector3CrossProduct(dir1, dir2)} {}
 
 void Plane::draw() {
-    // draw 2 triangles representing the plane
     DrawTriangle3D(v3, v1, origin, GREEN);
     DrawTriangle3D(v3, v2, v1, GREEN);
+    // back-side
+    DrawTriangle3D(v1, v3, origin, BLUE);
+    DrawTriangle3D(v1, v2, v3, BLUE);
 }

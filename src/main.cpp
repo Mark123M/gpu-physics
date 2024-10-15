@@ -88,8 +88,12 @@ FileLogger logger;
 bool isPaused = false;
 float timestep = 1.f; // timestep in seconds
 
-Sphere s{1.f, 1.f, Vector3{0.f, 100.f, 0.f}, Vector3{10.f, 0.f, 30.f}, 0.4f, 0.f, 0.f};
+// colliders
 Plane p{Vector3Zero(), Vector3{1.f, 0.f, 0.f}, Vector3{0.f, 0.f, 1.f}, 12.f, 12.f};
+std::vector<Plane> colliders{p};
+
+// objects
+Sphere s{1.f, 1.f, Vector3{0.f, 100.f, 0.f}, Vector3{10.f, 0.f, 30.f}, 0.4f, 0.f, 0.f, colliders};
 
 static void updateCamera(void) {
     if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) && IsMouseButtonDown(MOUSE_BUTTON_RIGHT)) {
