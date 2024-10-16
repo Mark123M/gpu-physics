@@ -45,7 +45,7 @@ static void UpdateDrawFrame(void);          // Update and draw one frame
 //----------------------------------------------------------------------------------
 // Main entry point
 //----------------------------------------------------------------------------------
-int main()
+int main(int argc, char ** argv)
 {   
     // Initialization
     //--------------------------------------------------------------------------------------
@@ -85,7 +85,7 @@ int main()
 
 FileLogger logger;
 
-bool isPaused = false;
+bool isPaused = true;
 float timestep = 1.f; // timestep in seconds
 
 // colliders
@@ -93,7 +93,9 @@ Plane p{Vector3Zero(), Vector3{1.f, 0.f, 0.f}, Vector3{0.f, 0.f, 1.f}, 12.f, 12.
 std::vector<Plane> colliders{p};
 
 // objects
-Sphere s{1.f, 1.f, Vector3{0.f, 100.f, 0.f}, Vector3{10.f, 0.f, 30.f}, 0.4f, 0.f, 0.f, colliders};
+//Sphere s{1.f, 1.f, Vector3{0.f, 100.f, 0.f}, Vector3{10.f, 0.f, 30.f}, 0.4f, 0.f, 0.f, colliders};
+Sphere s{1.f, 1.f, Vector3{0.f, 10.f, 0.f}, Vector3{10.f, 0.f, 30.f}, 0.4f, 0.8f, 0.1f, colliders, logger};
+// no horizontal terminal velocity bcs no wind
 
 static void updateCamera(void) {
     if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) && IsMouseButtonDown(MOUSE_BUTTON_RIGHT)) {
@@ -117,7 +119,6 @@ static void updateObjects(float deltaTime) {
     if (isPaused) {
         if (IsKeyPressed(KEY_F)) {
             s.update(timestep);
-            logger.logToFile(s.stringify());
         }
     } else {
         s.update(deltaTime);

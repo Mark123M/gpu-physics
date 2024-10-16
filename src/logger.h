@@ -5,6 +5,7 @@
 
 class FileLogger {
     std::ofstream myFile;
+    int lines;
 public:
     FileLogger();
     ~FileLogger();

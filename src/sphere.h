@@ -3,6 +3,7 @@
 #include "raylib.h"
 #include "raymath.h"
 #include "plane.h"
+#include "logger.h"
 #include <iostream>
 #include <vector>
 
@@ -12,8 +13,9 @@ class Sphere {
     const Vector3 pos0, vel0; // initial states
     
     std::vector<Plane> &colliders;
+    FileLogger &logger;
 public:
-    Sphere(float radius, float mass, Vector3 pos, Vector3 vel, float cAir, float cRestitution, float cFriction, std::vector<Plane> &colliders);
+    Sphere(float radius, float mass, Vector3 pos, Vector3 vel, float cAir, float cRestitution, float cFriction, std::vector<Plane> &colliders, FileLogger &logger);
     void updateForce(float deltaTime);
     void integrate(float deltaTime);
     void collisionResponse(Plane &p);
