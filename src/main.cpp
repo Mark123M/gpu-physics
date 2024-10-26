@@ -94,7 +94,7 @@ std::vector<Plane> colliders{p};
 
 // objects
 //Sphere s{1.f, 1.f, Vector3{0.f, 100.f, 0.f}, Vector3{10.f, 0.f, 30.f}, 0.4f, 0.f, 0.f, colliders};
-Sphere s{1.f, 1.f, Vector3{0.f, 10.f, 0.f}, Vector3{10.f, 0.f, 30.f}, 0.4f, 0.8f, 0.1f, colliders, logger};
+Sphere s{1.f, 1.f, Vector3{0.f, 10.f, 0.f}, Vector3{5.f, 0.f, 5.f}, 0.4f, 0.8f, 0.1f, colliders, logger};
 // no horizontal terminal velocity bcs no wind
 
 static void updateCamera(void) {
