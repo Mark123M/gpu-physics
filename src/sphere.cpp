@@ -3,7 +3,7 @@
 const Vector3 GRAVITY{0, -10, 0};
 
 Sphere::Sphere(float radius, float mass, Vector3 pos, Vector3 vel, float cAir, float cRestitution, float cFriction, std::vector<Plane> &colliders, FileLogger &logger):
-    radius{radius}, mass{mass}, cAir{cAir}, cRestitution{cRestitution}, cFriction{cFriction}, pos{pos}, vel{vel}, posPrev{pos}, velPrev{vel}, pos0{pos}, vel0{vel}, colliders{colliders}, logger{logger}
+    Object3D{std::vector<Vector3>{pos, vel}, colliders, logger}, radius{radius}, mass{mass}, cAir{cAir}, cRestitution{cRestitution}, cFriction{cFriction}, pos{pos}, vel{vel}, posPrev{pos}, velPrev{vel}, pos0{pos}, vel0{vel}, colliders{colliders}, logger{logger}
 {}
 
 void Sphere::updateForce(float deltaTime) {
@@ -21,6 +21,10 @@ void Sphere::collisionResponse(Plane &p) {
     Vector3 velT = Vector3Subtract(velPrev, velN);
     vel = Vector3Add(Vector3Scale(velN, -cRestitution), Vector3Scale(velT, 1 - cFriction));
     logger.logToFile("  VELN: " + to_string(velN) + " VELT: " + to_string(velT));
+}
+
+std::vector<Vector3> Sphere::F(std::vector<Vector3> &S, float timestep, float time) {
+    return {};
 }
 
 void Sphere::update(float deltaTime) {
@@ -68,13 +72,6 @@ void Sphere::update(float deltaTime) {
 void Sphere::draw() {
     DrawSphere(pos, radius, RED);
     DrawSphereWires(pos, radius, 5, 5, BLACK);
-}
-
-void Sphere::reset() {
-    vel = vel0;
-    pos = pos0;
-    velPrev = vel0;
-    posPrev = pos0; 
 }
 
 std::string Sphere::stringify() {

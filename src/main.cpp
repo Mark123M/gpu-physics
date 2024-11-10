@@ -22,6 +22,7 @@
 #include "raylib.h"
 #include "raymath.h"
 #include "logger.h"
+#include "object3d.h"
 #include "sphere.h"
 #include "plane.h"
 
