@@ -1,11 +1,14 @@
 #ifndef _SPHERE_
 #define _SPHERE_
+
+#include <iostream>
+#include <vector>
+
 #include "raylib.h"
 #include "raymath.h"
 #include "plane.h"
 #include "logger.h"
-#include <iostream>
-#include <vector>
+#include "util.h"
 
 class Sphere {
     float radius, mass, cAir, cRestitution, cFriction;

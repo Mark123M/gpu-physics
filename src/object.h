@@ -1,11 +1,12 @@
 #ifndef _OBJECT_
 #define _OBJECT_
+
+#include <iostream>
+#include <vector>
 #include "raylib.h"
 #include "raymath.h"
 #include "plane.h"
 #include "logger.h"
-#include <iostream>
-#include <vector>
 
 class Object {
     std::vector<Vector3> state;

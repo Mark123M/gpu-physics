@@ -1,7 +1,12 @@
 #ifndef _LOGGER_
 #define _LOGGER_
+
 #include <string>
 #include <fstream>
+#include <iostream>
+#include <iomanip>
+#include <ctime>
+#include <sstream>
 
 class FileLogger {
     std::ofstream myFile;

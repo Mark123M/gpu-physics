@@ -1,6 +1,4 @@
 #include "sphere.h"
-#include "raylib.h"
-#include "raymath.h"
 
 const Vector3 GRAVITY{0, -10, 0};
 
@@ -18,27 +16,11 @@ void Sphere::integrate(float deltaTime) {
     pos = Vector3Add(posPrev, Vector3Scale(velPrev, deltaTime));
 }
 
-std::string to_string(const Vector3 &v) {
-    return "(" + std::to_string(v.x) + ", " + std::to_string(v.y) + ", " + std::to_string(v.z) + ")";
-}
-
 void Sphere::collisionResponse(Plane &p) {
     Vector3 velN = Vector3Scale(p.normal, Vector3DotProduct(velPrev, p.normal));
     Vector3 velT = Vector3Subtract(velPrev, velN);
     vel = Vector3Add(Vector3Scale(velN, -cRestitution), Vector3Scale(velT, 1 - cFriction));
     logger.logToFile("  VELN: " + to_string(velN) + " VELT: " + to_string(velT));
-}
-
-bool gt(float val, float base, float tolerance) {
-    return val > base + tolerance;
-}
-
-bool lt(float val, float base, float tolerance) {
-    return val < base - tolerance;
-}
-
-bool eq(float val, float base, float tolerance) {
-    return base - tolerance <= val && val <= base + tolerance;
 }
 
 void Sphere::update(float deltaTime) {

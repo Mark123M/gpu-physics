@@ -1,9 +1,4 @@
 #include "logger.h"
-#include <fstream>
-#include <iostream>
-#include <iomanip>
-#include <ctime>
-#include <sstream>
 
 const int MAX_LINES = 1000;
 
