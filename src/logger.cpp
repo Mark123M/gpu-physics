@@ -12,7 +12,7 @@ std::string FileLogger::getCurTimeString() {
     auto tm = *std::localtime(&t);
 
     std::ostringstream oss;
-    oss << std::put_time(&tm, "%H-%M-%S_%m-%d-%Y");
+    oss << std::put_time(&tm, "%Y-%m-%d_%H-%M-%S");
     return oss.str();
 }
 

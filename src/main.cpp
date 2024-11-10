@@ -86,7 +86,7 @@ int main(int argc, char ** argv)
 FileLogger logger;
 
 bool isPaused = true;
-float timestep = 1.f; // timestep in seconds
+float timestep = 0.1f; // timestep in seconds
 
 // colliders
 Plane p{Vector3Zero(), Vector3{1.f, 0.f, 0.f}, Vector3{0.f, 0.f, 1.f}, 12.f, 12.f};

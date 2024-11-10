@@ -9,7 +9,7 @@ Sphere::Sphere(float radius, float mass, Vector3 pos, Vector3 vel, float cAir, f
 {}
 
 void Sphere::updateForce(float deltaTime) {
-    force = Vector3Add(GRAVITY, Vector3Scale(vel, -cAir)); // air resistance
+    force = Vector3Add(GRAVITY, Vector3Scale(velPrev, -cAir)); // air resistance
 }
 
 void Sphere::integrate(float deltaTime) {
@@ -18,10 +18,27 @@ void Sphere::integrate(float deltaTime) {
     pos = Vector3Add(posPrev, Vector3Scale(velPrev, deltaTime));
 }
 
+std::string to_string(const Vector3 &v) {
+    return "(" + std::to_string(v.x) + ", " + std::to_string(v.y) + ", " + std::to_string(v.z) + ")";
+}
+
 void Sphere::collisionResponse(Plane &p) {
     Vector3 velN = Vector3Scale(p.normal, Vector3DotProduct(velPrev, p.normal));
     Vector3 velT = Vector3Subtract(velPrev, velN);
     vel = Vector3Add(Vector3Scale(velN, -cRestitution), Vector3Scale(velT, 1 - cFriction));
+    logger.logToFile("  VELN: " + to_string(velN) + " VELT: " + to_string(velT));
+}
+
+bool gt(float val, float base, float tolerance) {
+    return val > base + tolerance;
+}
+
+bool lt(float val, float base, float tolerance) {
+    return val < base - tolerance;
+}
+
+bool eq(float val, float base, float tolerance) {
+    return base - tolerance <= val && val <= base + tolerance;
 }
 
 void Sphere::update(float deltaTime) {
@@ -30,9 +47,9 @@ void Sphere::update(float deltaTime) {
     while (timestepRemaining > 0) {
         velPrev = vel;
         posPrev = pos; 
-        updateForce(deltaTime);
-        integrate(deltaTime);
-
+        updateForce(timestepRemaining);
+        integrate(timestepRemaining);
+        logger.logToFile("START VELPREV: " + to_string(velPrev) + " START POSPREV: " + to_string(posPrev));
         float minTimeFraction = 1.f;
         Plane *firstPlane = nullptr;
         for (Plane &p: colliders) {
@@ -40,10 +57,10 @@ void Sphere::update(float deltaTime) {
             float dPrev = abs(Vector3DotProduct(Vector3Subtract(posPrev, p.origin), p.normal)) - radius;
             float d = abs(Vector3DotProduct(Vector3Subtract(pos, p.origin), p.normal)) - radius;
 
-            logger.logToFile("dPrev: " + std::to_string(dPrev) + " prev: " + std::to_string(d));
+            logger.logToFile("dPrev: " + std::to_string(dPrev) + " dCur: " + std::to_string(d));
             
             // if parity is different, collision occurred
-            if ((dPrev > 0) != (d > 0)) {
+            if ((dPrev >= -0.02 && d < 0) || (dPrev <= 0.02 && d > 0)) {
                 float timeFraction = abs(dPrev) / (abs(dPrev) + abs(d));
                 if (timeFraction < minTimeFraction) {
                     minTimeFraction = timeFraction;
@@ -51,14 +68,18 @@ void Sphere::update(float deltaTime) {
                 }
             }
         }
-        logger.logToFile("  time fraction: " + std::to_string(minTimeFraction));
+        logger.logToFile("  time remaining: " + std::to_string(timestepRemaining) + " time fraction: " + std::to_string(minTimeFraction));
         if (firstPlane != nullptr) {
+            updateForce(minTimeFraction * timestepRemaining);
             integrate(minTimeFraction * timestepRemaining);
+            logger.logToFile("  COLLISION VELPREV: " + to_string(velPrev) + " COLLISION POSPREV: " + to_string(posPrev));
             collisionResponse(*firstPlane);
         }
+        logger.logToFile("  " + stringify());
         timestepRemaining -= minTimeFraction * timestepRemaining;
-        logger.logToFile("  time remaining: " + std::to_string(timestepRemaining));
     }
+
+    logger.logToFile("FINAL STATE: " + stringify());
 }
 
 void Sphere::draw() {
@@ -71,10 +92,6 @@ void Sphere::reset() {
     pos = pos0;
     velPrev = vel0;
     posPrev = pos0; 
-}
-
-std::string to_string(const Vector3 &v) {
-    return "(" + std::to_string(v.x) + ", " + std::to_string(v.y) + ", " + std::to_string(v.z) + ")";
 }
 
 std::string Sphere::stringify() {

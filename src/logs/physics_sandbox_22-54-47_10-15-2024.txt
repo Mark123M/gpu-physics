@@ -1,4 +1,0 @@
-dPrev: 9.000000 prev: 9.000000
-  time fraction: 1.000000
-dPrev: 9.000000 prev: -1.000000
-  time fraction: 1.000000
