@@ -58,9 +58,10 @@ void Sphere::update(float deltaTime) {
             float d = abs(Vector3DotProduct(Vector3Subtract(pos, p.origin), p.normal)) - radius;
 
             logger.logToFile("dPrev: " + std::to_string(dPrev) + " dCur: " + std::to_string(d));
-            
+            logger.logToFile("  DOT PRODUCT: " + std::to_string(Vector3DotProduct(velPrev, p.normal)));
+            logger.logToFile("  PLANE: " + to_string(p.normal));
             // if parity is different, collision occurred
-            if ((dPrev >= -0.02 && d < 0) || (dPrev <= 0.02 && d > 0)) {
+            if (!eq(dPrev, 0, 0.0005) && dPrev > 0 != d > 0) {
                 float timeFraction = abs(dPrev) / (abs(dPrev) + abs(d));
                 if (timeFraction < minTimeFraction) {
                     minTimeFraction = timeFraction;
