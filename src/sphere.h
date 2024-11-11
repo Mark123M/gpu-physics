@@ -23,7 +23,7 @@ public:
     void updateForce(float deltaTime);
     void integrate(float deltaTime);
     void collisionResponse(Plane &p);
-    std::vector<Vector3> F(std::vector<Vector3> &S, float timestep, float time) override;
+    std::vector<Vector3> F(std::vector<Vector3> &S, float time) override;
 
     void update(float deltaTime) override;
     void draw() override;

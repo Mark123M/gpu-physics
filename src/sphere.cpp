@@ -23,8 +23,10 @@ void Sphere::collisionResponse(Plane &p) {
     logger.logToFile("  VELN: " + to_string(velN) + " VELT: " + to_string(velT));
 }
 
-std::vector<Vector3> Sphere::F(std::vector<Vector3> &S, float timestep, float time) {
-    return {};
+std::vector<Vector3> Sphere::F(std::vector<Vector3> &S, float time) {
+    Vector3 vel = S[1];
+    Vector3 accel = Vector3Scale(Vector3Add(GRAVITY, Vector3Scale(S[1], -cAir)), 1 / mass);
+    return {vel, accel};
 }
 
 void Sphere::update(float deltaTime) {
