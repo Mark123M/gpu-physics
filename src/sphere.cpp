@@ -1,11 +1,9 @@
 #include "sphere.h"
-#include "raylib.h"
-#include "raymath.h"
 
 const Vector3 GRAVITY{0, -10, 0};
 
 Sphere::Sphere(float radius, float mass, Vector3 pos, Vector3 vel, float cAir, float cRestitution, float cFriction, std::vector<Plane> &colliders, FileLogger &logger):
-    radius{radius}, mass{mass}, cAir{cAir}, cRestitution{cRestitution}, cFriction{cFriction}, pos{pos}, vel{vel}, posPrev{pos}, velPrev{vel}, pos0{pos}, vel0{vel}, colliders{colliders}, logger{logger}
+    Object3D{std::vector<Vector3>{pos, vel}, colliders, logger}, radius{radius}, mass{mass}, cAir{cAir}, cRestitution{cRestitution}, cFriction{cFriction}, pos{pos}, vel{vel}, posPrev{pos}, velPrev{vel}, pos0{pos}, vel0{vel}, colliders{colliders}, logger{logger}
 {}
 
 void Sphere::updateForce(float deltaTime) {
@@ -18,10 +16,6 @@ void Sphere::integrate(float deltaTime) {
     pos = Vector3Add(posPrev, Vector3Scale(velPrev, deltaTime));
 }
 
-std::string to_string(const Vector3 &v) {
-    return "(" + std::to_string(v.x) + ", " + std::to_string(v.y) + ", " + std::to_string(v.z) + ")";
-}
-
 void Sphere::collisionResponse(Plane &p) {
     Vector3 velN = Vector3Scale(p.normal, Vector3DotProduct(velPrev, p.normal));
     Vector3 velT = Vector3Subtract(velPrev, velN);
@@ -29,16 +23,10 @@ void Sphere::collisionResponse(Plane &p) {
     logger.logToFile("  VELN: " + to_string(velN) + " VELT: " + to_string(velT));
 }
 
-bool gt(float val, float base, float tolerance) {
-    return val > base + tolerance;
-}
-
-bool lt(float val, float base, float tolerance) {
-    return val < base - tolerance;
-}
-
-bool eq(float val, float base, float tolerance) {
-    return base - tolerance <= val && val <= base + tolerance;
+std::vector<Vector3> Sphere::F(std::vector<Vector3> &S, float time) {
+    Vector3 vel = S[1];
+    Vector3 accel = Vector3Scale(Vector3Add(GRAVITY, Vector3Scale(S[1], -cAir)), 1 / mass);
+    return {vel, accel};
 }
 
 void Sphere::update(float deltaTime) {
@@ -86,13 +74,6 @@ void Sphere::update(float deltaTime) {
 void Sphere::draw() {
     DrawSphere(pos, radius, RED);
     DrawSphereWires(pos, radius, 5, 5, BLACK);
-}
-
-void Sphere::reset() {
-    vel = vel0;
-    pos = pos0;
-    velPrev = vel0;
-    posPrev = pos0; 
 }
 
 std::string Sphere::stringify() {

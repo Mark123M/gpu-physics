@@ -22,6 +22,7 @@
 #include "raylib.h"
 #include "raymath.h"
 #include "logger.h"
+#include "object3d.h"
 #include "sphere.h"
 #include "plane.h"
 
@@ -89,7 +90,7 @@ bool isPaused = true;
 float timestep = 0.1f; // timestep in seconds
 
 // colliders
-Plane p{Vector3Zero(), Vector3{0.f, 0.f, 1.f}, Vector3{1.f, 0.f, 0.f}, 12.f, 12.f};
+Plane p{Vector3Zero(), Vector3{1.f, 0.f, 0.f}, Vector3{0.f, 0.f, 1.f}, 12.f, 12.f};
 std::vector<Plane> colliders{p};
 
 // objects

@@ -1,13 +1,17 @@
 #ifndef _SPHERE_
 #define _SPHERE_
-#include "raylib.h"
-#include "raymath.h"
-#include "plane.h"
-#include "logger.h"
+
 #include <iostream>
 #include <vector>
 
-class Sphere {
+#include "raylib.h"
+#include "raymath.h"
+#include "object3d.h"
+#include "plane.h"
+#include "logger.h"
+#include "util.h"
+
+class Sphere: public Object3D {
     float radius, mass, cAir, cRestitution, cFriction;
     Vector3 pos, vel, posPrev, velPrev, force;
     const Vector3 pos0, vel0; // initial states
@@ -19,13 +23,11 @@ public:
     void updateForce(float deltaTime);
     void integrate(float deltaTime);
     void collisionResponse(Plane &p);
-    void update(float deltaTime);
-    void draw();
+    std::vector<Vector3> F(std::vector<Vector3> &S, float time) override;
 
-    void reset();
-    void setColliders(std::vector<Plane> &colliders);
-
-    std::string stringify();
+    void update(float deltaTime) override;
+    void draw() override;
+    std::string stringify() override;
 };
 
 #endif

@@ -1,8 +1,9 @@
 #ifndef _PLANE_
 #define _PLANE_
+
+#include <string>
 #include "raylib.h"
 #include "raymath.h"
-#include <string>
 
 class Plane {
     float width, height;
