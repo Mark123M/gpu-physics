@@ -16,27 +16,6 @@ bool eq(float val, float base, float tolerance) {
     return base - tolerance <= val && val <= base + tolerance;
 }
 
-std::vector<Vector3> &operator+=(std::vector<Vector3> &v1, const std::vector<Vector3> &v2) {
-    for (size_t i = 0; i < v1.size(); i++) {
-        v1[i] = Vector3Add(v1[i], v2[i]);
-    }
-    return v1;
-}
-
-std::vector<Vector3> &operator-=(std::vector<Vector3> &v1, const std::vector<Vector3> &v2) {
-    for (size_t i = 0; i < v1.size(); i++) {
-        v1[i] = Vector3Subtract(v1[i], v2[i]);
-    }
-    return v1;
-}
-
-std::vector<Vector3> &operator*=(float k, std::vector<Vector3> &v) {
-    for (size_t i = 0; i < v.size(); i++) {
-        v[i] = Vector3Scale(v[i], k);
-    }
-    return v;
-}
-
 Vector3 operator+(const Vector3 &v1, const Vector3 &v2) {
     return {v1.x + v2.x, v1.y + v2.y, v1.z + v2.z};
 }
@@ -55,16 +34,14 @@ class AddExpr {
     const R &r;
     std::vector<Vector3> v;
 public:
-    AddExpr(const L &l_, const R &r_): l{l_}, r{r_}, v{} {}
+    AddExpr(const L &l_, const R &r_): l{l_}, r{r_} {}
     Vector3 operator[](size_t i) const {
         return l[i] + r[i];
     }
-    Vector3 &operator[](size_t i) {
-        return l[i] + r[i];
-    }
     std::vector<Vector3> &vec() {
-        for (size_t i = 0; i < l.size(); i++) {
-            v.push_back(this->operator[](i));
+        v = std::vector<Vector3>(size());
+        for (size_t i = 0; i < size(); i++) {
+            v[i] = this->operator[](i);
         }
         return v;
     }
@@ -84,16 +61,14 @@ class SubExpr {
     const R &r;
     std::vector<Vector3> v;
 public:
-    SubExpr(const L &l_, const R &r_): l{l_}, r{r_}, v{} {}
+    SubExpr(const L &l_, const R &r_): l{l_}, r{r_} {}
     Vector3 operator[](size_t i) const {
         return l[i] - r[i];
     }
-    Vector3 &operator[](size_t i) {
-        return l[i] - r[i];
-    }
     std::vector<Vector3> &vec() {
-        for (size_t i = 0; i < l.size(); i++) {
-            v.push_back(this->operator[](i));
+        v = std::vector<Vector3>(size());
+        for (size_t i = 0; i < size(); i++) {
+            v[i] = this->operator[](i);
         }
         return v;
     }
@@ -113,16 +88,14 @@ class ScaleExpr {
     const R &r;
     std::vector<Vector3> v;
 public:
-    ScaleExpr(float k_, const R &r_): k{k_}, r{r_}, v{} {}
+    ScaleExpr(float k_, const R &r_): k{k_}, r{r_} {}
     Vector3 operator[](size_t i) const {
         return k * r[i];
     }
-    Vector3 &operator[](size_t i) {
-        return k * r[i];
-    }
     std::vector<Vector3> &vec() {
-        for (size_t i = 0; i < r.size(); i++) {
-            v.push_back(this->operator[](i));
+        v = std::vector<Vector3>(size());
+        for (size_t i = 0; i < size(); i++) {
+            v[i] = this->operator[](i);
         }
         return v;
     }
@@ -145,9 +118,13 @@ std::vector<Vector3> &operator=(std::vector<Vector3> &state, Expr &&expr) {
 // 2. precompute vector 
 // 3. store vec representation to be computed eventually
 
-std::vector<Vector3> RK4(const std::vector<Vector3> &statePrev, float timestep, float time, std::vector<Vector3> (&F)(std::vector<Vector3>&, float)) {
+std::vector<Vector3> RK4(const std::vector<Vector3> &statePrev, float h, float time, std::vector<Vector3> (&F)(std::vector<Vector3>&, float)) {
     std::vector<Vector3> S = statePrev;
 
     std::vector<Vector3> K1 = F(S, time);
-    std::vector<Vector3> K2 = F((S + (timestep / 2) * K1).vec(), time);
+    std::vector<Vector3> K2 = F((S + (h / 2) * K1).vec(), time);
+    std::vector<Vector3> K3 = F((S + (h / 2) * K2).vec(), time);
+    std::vector<Vector3> K4 = F((S + h * K3).vec(), time);
+
+    return (S + (h / 6) * (K1 + 2 * K2 + 2 * K3 + K4)).vec();
 }
