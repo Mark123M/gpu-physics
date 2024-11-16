@@ -12,6 +12,7 @@
 #include "util.h"
 
 class Sphere: public Object3D {
+protected:
     float radius, mass, cAir, cRestitution, cFriction;
     Vector3 pos, vel, posPrev, velPrev, force;
     const Vector3 pos0, vel0; // initial states
@@ -23,7 +24,7 @@ public:
     void updateForce(float deltaTime);
     void integrate(float deltaTime);
     void collisionResponse(Plane &p);
-    std::vector<Vector3> F(std::vector<Vector3> &S, float time) override;
+    std::vector<Vector3> F(const std::vector<Vector3> &S, float time) override;
 
     void update(float deltaTime) override;
     void draw() override;

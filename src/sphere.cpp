@@ -10,12 +10,6 @@ void Sphere::updateForce(float deltaTime) {
     force = Vector3Add(GRAVITY, Vector3Scale(velPrev, -cAir)); // air resistance
 }
 
-void Sphere::integrate(float deltaTime) {
-    Vector3 accel = Vector3Scale(force, 1 / mass);
-    vel = Vector3Add(velPrev, Vector3Scale(accel, deltaTime));
-    pos = Vector3Add(posPrev, Vector3Scale(velPrev, deltaTime));
-}
-
 void Sphere::collisionResponse(Plane &p) {
     Vector3 velN = Vector3Scale(p.normal, Vector3DotProduct(velPrev, p.normal));
     Vector3 velT = Vector3Subtract(velPrev, velN);
@@ -23,10 +17,17 @@ void Sphere::collisionResponse(Plane &p) {
     logger.logToFile("  VELN: " + to_string(velN) + " VELT: " + to_string(velT));
 }
 
-std::vector<Vector3> Sphere::F(std::vector<Vector3> &S, float time) {
+std::vector<Vector3> Sphere::F(const std::vector<Vector3> &S, float time) {
     Vector3 vel = S[1];
     Vector3 accel = Vector3Scale(Vector3Add(GRAVITY, Vector3Scale(S[1], -cAir)), 1 / mass);
     return {vel, accel};
+}
+
+void Sphere::integrate(float deltaTime) {
+   /* Vector3 accel = Vector3Scale(force, 1 / mass);
+    vel = Vector3Add(velPrev, Vector3Scale(accel, deltaTime));
+    pos = Vector3Add(posPrev, Vector3Scale(velPrev, deltaTime)); */
+    state = RK4(statePrev, *this);
 }
 
 void Sphere::update(float deltaTime) {
