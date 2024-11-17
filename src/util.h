@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include "raylib.h"
 #include "raymath.h"
 #include "object3d.h"
 
