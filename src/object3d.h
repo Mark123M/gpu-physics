@@ -9,6 +9,7 @@
 #include "logger.h"
 
 class Object3D {
+protected:
     std::vector<Vector3> state;
     std::vector<Vector3> statePrev;
     std::vector<Vector3> state0; // initial states
@@ -17,7 +18,7 @@ class Object3D {
     FileLogger &logger;
 public:
     Object3D(std::vector<Vector3> state0, std::vector<Plane> &colliders, FileLogger &logger);
-    virtual std::vector<Vector3> F(std::vector<Vector3> &S, float timestep) = 0;
+    virtual std::vector<Vector3> F(const std::vector<Vector3> &S, float timestep) = 0;
     void reset();
 
     virtual void update(float deltaTime) = 0;

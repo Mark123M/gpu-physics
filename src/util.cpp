@@ -118,13 +118,13 @@ std::vector<Vector3> &operator=(std::vector<Vector3> &state, Expr &&expr) {
 // 2. precompute vector 
 // 3. store vec representation to be computed eventually
 
-std::vector<Vector3> RK4(const std::vector<Vector3> &statePrev, float h, float time, std::vector<Vector3> (&F)(std::vector<Vector3>&, float)) {
+std::vector<Vector3> RK4(const std::vector<Vector3> &statePrev, Object3D &ref, float h, float time) {
     std::vector<Vector3> S = statePrev;
 
-    std::vector<Vector3> K1 = F(S, time);
-    std::vector<Vector3> K2 = F((S + (h / 2) * K1).vec(), time);
-    std::vector<Vector3> K3 = F((S + (h / 2) * K2).vec(), time);
-    std::vector<Vector3> K4 = F((S + h * K3).vec(), time);
+    std::vector<Vector3> K1 = ref.F(S, time);
+    std::vector<Vector3> K2 = ref.F((S + (h / 2) * K1).vec(), time);
+    std::vector<Vector3> K3 = ref.F((S + (h / 2) * K2).vec(), time);
+    std::vector<Vector3> K4 = ref.F((S + h * K3).vec(), time);
 
     return (S + (h / 6) * (K1 + 2 * K2 + 2 * K3 + K4)).vec();
 }
