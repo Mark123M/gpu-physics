@@ -3,7 +3,7 @@
 const Vector3 GRAVITY{0, -10, 0};
 
 Sphere::Sphere(float radius, float mass, Vector3 pos, Vector3 vel, float cAir, float cRestitution, float cFriction, std::vector<Plane> &colliders, FileLogger &logger):
-    Object3D{std::vector<Vector3>{pos, vel}, colliders, logger}, radius{radius}, mass{mass}, cAir{cAir}, cRestitution{cRestitution}, cFriction{cFriction}, colliders{colliders}, logger{logger}
+    Object3D{std::vector<Vector3>{pos, vel}, colliders, logger}, radius{radius}, mass{mass}, cAir{cAir}, cRestitution{cRestitution}, cFriction{cFriction}
 {
     std::vector<Vector3> test = RK4(state, *this);
     for (Vector3 &v: test) {
@@ -47,14 +47,14 @@ void Sphere::update(float deltaTime) {
         float minTimeFraction = 1.f;
         Plane *firstPlane = nullptr;
         for (Plane &p: colliders) {
-            // abs distance from plane
+            // Abs distance from plane
             float dPrev = abs(Vector3DotProduct(Vector3Subtract(statePrev[0], p.origin), p.normal)) - radius;
             float d = abs(Vector3DotProduct(Vector3Subtract(state[0], p.origin), p.normal)) - radius;
 
             logger.logToFile("dPrev: " + std::to_string(dPrev) + " dCur: " + std::to_string(d));
             logger.logToFile("  DOT PRODUCT: " + std::to_string(Vector3DotProduct(statePrev[1], p.normal)));
             logger.logToFile("  PLANE: " + to_string(p.normal));
-            // if parity is different, collision occurred
+            // If parity is different, collision occurred
             if (!eq(dPrev, 0, 0.0005) && dPrev > 0 != d > 0) {
                 float timeFraction = abs(dPrev) / (abs(dPrev) + abs(d));
                 if (timeFraction < minTimeFraction) {

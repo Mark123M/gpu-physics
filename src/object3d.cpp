@@ -7,3 +7,5 @@ void Object3D::reset() {
     state = state0;
     statePrev = state0;
 }
+
+void Object3D::draw() {}

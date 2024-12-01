@@ -87,16 +87,16 @@ int main(int argc, char ** argv)
 FileLogger logger;
 
 bool isPaused = true;
-float timestep = 0.1f; // timestep in seconds
+float timestep = 0.1f; // Timestep in seconds
 
-// colliders
+// Colliders
 Plane p{Vector3Zero(), Vector3{1.f, 0.f, 0.f}, Vector3{0.f, 0.f, 1.f}, 12.f, 12.f};
 std::vector<Plane> colliders{p};
 
-// objects
-//Sphere s{1.f, 1.f, Vector3{0.f, 100.f, 0.f}, Vector3{10.f, 0.f, 30.f}, 0.4f, 0.f, 0.f, colliders};
+// Objects
+// Sphere s{1.f, 1.f, Vector3{0.f, 100.f, 0.f}, Vector3{10.f, 0.f, 30.f}, 0.4f, 0.f, 0.f, colliders};
 Sphere s{1.f, 1.f, Vector3{0.f, 10.f, 0.f}, Vector3{5.f, 0.f, 5.f}, 0.4f, 0.8f, 0.1f, colliders, logger};
-// no horizontal terminal velocity bcs no wind
+// No horizontal terminal velocity bcs no wind
 
 static void updateCamera(void) {
     if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) && IsMouseButtonDown(MOUSE_BUTTON_RIGHT)) {
@@ -147,8 +147,8 @@ static void UpdateDrawFrame(void)
 
         BeginMode3D(camera);
 
-            //DrawCube(cubePosition, 2.0f, 2.0f, 2.0f, RED);
-            //DrawCubeWires(cubePosition, 2.0f, 2.0f, 2.0f, MAROON);
+            // DrawCube(cubePosition, 2.0f, 2.0f, 2.0f, RED);
+            // DrawCubeWires(cubePosition, 2.0f, 2.0f, 2.0f, MAROON);
             s.draw();
             p.draw();
 

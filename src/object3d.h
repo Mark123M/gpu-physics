@@ -12,7 +12,7 @@ class Object3D {
 protected:
     std::vector<Vector3> state;
     std::vector<Vector3> statePrev;
-    std::vector<Vector3> state0; // initial states
+    std::vector<Vector3> state0; // Initial states
     
     std::vector<Plane> &colliders;
     FileLogger &logger;
@@ -22,7 +22,7 @@ public:
     void reset();
 
     virtual void update(float deltaTime) = 0;
-    virtual void draw() = 0;
+    virtual void draw();
     virtual std::string stringify() = 0;
 };
 
