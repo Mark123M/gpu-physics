@@ -15,9 +15,9 @@ class Sphere: public Object3D {
 protected:
     float radius, mass, cAir, cRestitution, cFriction;
 public:
-    Sphere(float radius, float mass, Vector3 pos, Vector3 vel, float cAir, float cRestitution, float cFriction, std::vector<Plane> &colliders, FileLogger &logger);
+    Sphere(float radius, float mass, Vector3 pos, Vector3 vel, float cAir, float cRestitution, float cFriction, std::vector<std::unique_ptr<Collider>> &colliders, FileLogger &logger);
     void integrate(float deltaTime);
-    void collisionResponse(Plane &p);
+    void collisionResponse(Plane &p); // GENERALIZE WITH COLLIDER FACE?
     std::vector<Vector3> F(const std::vector<Vector3> &S, float time) override;
 
     void update(float deltaTime) override;

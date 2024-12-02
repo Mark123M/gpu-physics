@@ -1,6 +1,11 @@
 #ifndef _MYUTIL_
 #define _MYUTIL_
 
+#define MYBLUE       CLITERAL(Color){ 0, 121, 241, 100 }
+#define MYGREEN      CLITERAL(Color){ 0, 228, 48, 100 }
+#define MYORANGE     CLITERAL(Color){ 255, 161, 0, 100 }
+#define MYRED        CLITERAL(Color){ 230, 41, 55, 100 }
+
 #include <vector>
 #include <string>
 #include "raylib.h"
@@ -23,5 +28,7 @@ Probably not doing these because complicated matrix inversion for 3D vectors
 - matrix addition, subtraction, multiplication
 - jacobian
 */
+
+void drawPlane(Vector3 &v0, Vector3 &v1, Vector3 &v2, Vector3 &v3);
 
 #endif

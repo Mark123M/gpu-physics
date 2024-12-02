@@ -2,7 +2,7 @@
 
 const Vector3 GRAVITY{0, -10, 0};
 
-Sphere::Sphere(float radius, float mass, Vector3 pos, Vector3 vel, float cAir, float cRestitution, float cFriction, std::vector<Plane> &colliders, FileLogger &logger):
+Sphere::Sphere(float radius, float mass, Vector3 pos, Vector3 vel, float cAir, float cRestitution, float cFriction, std::vector<std::unique_ptr<Collider>> &colliders, FileLogger &logger):
     Object3D{std::vector<Vector3>{pos, vel}, colliders, logger}, radius{radius}, mass{mass}, cAir{cAir}, cRestitution{cRestitution}, cFriction{cFriction}
 {
     std::vector<Vector3> test = RK4(state, *this);
@@ -46,7 +46,11 @@ void Sphere::update(float deltaTime) {
         logger.logToFile("START VELPREV: " + to_string(statePrev[1]) + " START POSPREV: " + to_string(statePrev[0]));
         float minTimeFraction = 1.f;
         Plane *firstPlane = nullptr;
-        for (Plane &p: colliders) {
+
+        // @todo Each collider could return CollisionData (didCollide, collisionPoint etc.)
+        for (auto &c: colliders) {
+            Plane &p = dynamic_cast<Plane&>(*c);
+
             // Abs distance from plane
             float dPrev = abs(Vector3DotProduct(Vector3Subtract(statePrev[0], p.origin), p.normal)) - radius;
             float d = abs(Vector3DotProduct(Vector3Subtract(state[0], p.origin), p.normal)) - radius;

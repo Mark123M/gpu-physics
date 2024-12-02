@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include <memory.h>
 #include "raylib.h"
 #include "raymath.h"
 #include "object3d.h"
@@ -15,7 +16,7 @@ protected:
     float mass;
     Vector3 force; // Accumulated force on the point: gravity, lift/drag, spring + damper
 public:
-    Point(float mass, Vector3 pos, std::vector<Plane> &colliders, FileLogger &logger);
+    Point(float mass, Vector3 pos, std::vector<std::unique_ptr<Collider>> &colliders, FileLogger &logger);
     void integrate(float deltaTime);
     void collisionResponse(Plane &p);
     std::vector<Vector3> F(const std::vector<Vector3> &S, float time) override;
@@ -43,7 +44,7 @@ protected:
     std::vector<Spring> &springs;
     std::vector<Face> &faces;
 public:
-    SpringMesh(std::vector<Point> &points, std::vector<Spring> &springs, std::vector<Face> &faces, std::vector<Plane> &colliders, FileLogger &logger);
+    SpringMesh(std::vector<Point> &points, std::vector<Spring> &springs, std::vector<Face> &faces, std::vector<std::unique_ptr<Collider>> &colliders, FileLogger &logger);
 
     std::string stringify();
     void update(float deltaTime) override;

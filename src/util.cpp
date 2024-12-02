@@ -128,3 +128,18 @@ std::vector<Vector3> RK4(const std::vector<Vector3> &statePrev, Object3D &ref, f
 
     return (S + (h / 6) * (K1 + 2 * K2 + 2 * K3 + K4)).vec();
 }
+
+// Calculate barycentric coordinates to apply forces to edges and faces
+
+
+
+// Helper functions for drawing
+void drawPlane(Vector3 &v0, Vector3 &v1, Vector3 &v2, Vector3 &v3) {
+    // Front side
+    DrawTriangle3D(v3, v1, v0, MYGREEN);
+    DrawTriangle3D(v3, v2, v1, MYGREEN);
+    
+    // Back side
+    DrawTriangle3D(v1, v3, v0, MYBLUE);
+    DrawTriangle3D(v1, v2, v3, MYBLUE);
+}

@@ -31,12 +31,27 @@
 #endif
 #include <iostream>
 #include <debugapi.h>
+#include <memory>
 
 //----------------------------------------------------------------------------------
 // Local Variables Definition (local to this module)
 //----------------------------------------------------------------------------------
 Camera camera = { 0 };
 Vector3 cubePosition = { 0 };
+
+FileLogger logger;
+
+bool isPaused = true;
+float timestep = 0.1f; // Timestep in seconds
+
+// Colliders
+Plane p{Vector3Zero(), Vector3{1.f, 0.f, 0.f}, Vector3{0.f, 0.f, 1.f}, 12.f, 12.f};
+std::vector<std::unique_ptr<Collider>> colliders;
+
+// Objects
+// Sphere s{1.f, 1.f, Vector3{0.f, 100.f, 0.f}, Vector3{10.f, 0.f, 30.f}, 0.4f, 0.f, 0.f, colliders};
+Sphere s{1.f, 1.f, Vector3{0.f, 10.f, 0.f}, Vector3{5.f, 0.f, 5.f}, 0.4f, 0.8f, 0.1f, colliders, logger};
+// No horizontal terminal velocity bcs no wind
 
 //----------------------------------------------------------------------------------
 // Local Functions Declaration
@@ -62,6 +77,7 @@ int main(int argc, char ** argv)
     camera.projection = CAMERA_PERSPECTIVE;
 
     //--------------------------------------------------------------------------------------
+    colliders.push_back(std::make_unique<Plane>(p));
 
 #if defined(PLATFORM_WEB)
     emscripten_set_main_loop(UpdateDrawFrame, 60, 1);
@@ -83,20 +99,6 @@ int main(int argc, char ** argv)
     
     return 0;
 }
-
-FileLogger logger;
-
-bool isPaused = true;
-float timestep = 0.1f; // Timestep in seconds
-
-// Colliders
-Plane p{Vector3Zero(), Vector3{1.f, 0.f, 0.f}, Vector3{0.f, 0.f, 1.f}, 12.f, 12.f};
-std::vector<Plane> colliders{p};
-
-// Objects
-// Sphere s{1.f, 1.f, Vector3{0.f, 100.f, 0.f}, Vector3{10.f, 0.f, 30.f}, 0.4f, 0.f, 0.f, colliders};
-Sphere s{1.f, 1.f, Vector3{0.f, 10.f, 0.f}, Vector3{5.f, 0.f, 5.f}, 0.4f, 0.8f, 0.1f, colliders, logger};
-// No horizontal terminal velocity bcs no wind
 
 static void updateCamera(void) {
     if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) && IsMouseButtonDown(MOUSE_BUTTON_RIGHT)) {
@@ -150,7 +152,10 @@ static void UpdateDrawFrame(void)
             // DrawCube(cubePosition, 2.0f, 2.0f, 2.0f, RED);
             // DrawCubeWires(cubePosition, 2.0f, 2.0f, 2.0f, MAROON);
             s.draw();
-            p.draw();
+
+            for (auto &c: colliders) {
+                c->draw();
+            }
 
             DrawGrid(50, 1.0f);
 

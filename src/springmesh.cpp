@@ -1,6 +1,6 @@
 #include "springmesh.h"
 
-Point::Point(float mass, Vector3 pos, std::vector<Plane> &colliders, FileLogger &logger):
+Point::Point(float mass, Vector3 pos, std::vector<std::unique_ptr<Collider>> &colliders, FileLogger &logger):
     Object3D{{pos, Vector3{0, 0, 0}}, colliders, logger}, mass{mass} {}
 
 void Point::integrate(float deltaTime) {
@@ -29,7 +29,7 @@ std::string Point::stringify() {
     return std::string();
 }
 
-SpringMesh::SpringMesh(std::vector<Point> &points, std::vector<Spring> &springs, std::vector<Face> &faces, std::vector<Plane> &colliders, FileLogger &logger):
+SpringMesh::SpringMesh(std::vector<Point> &points, std::vector<Spring> &springs, std::vector<Face> &faces, std::vector<std::unique_ptr<Collider>> &colliders, FileLogger &logger):
     Object3D{{}, colliders, logger}, points{points}, springs{springs}, faces{faces} {}
 
 std::string SpringMesh::stringify() {
@@ -54,5 +54,9 @@ void SpringMesh::draw() {
         const Vector3 &v2 = s.p2.getPos();
 
         DrawLine3D(v1, v2, BLACK);
+    }
+
+    for (Point &p: points) {
+        DrawPoint3D(p.getPos(), BLUE);
     }
 }
