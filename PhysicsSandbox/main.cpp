@@ -211,9 +211,7 @@ int main() {
     };
 
     // Bind VAO for storing VBO and vertex attribute configurations
-    unsigned int VBO;
-    unsigned int EBO;
-    unsigned int VAO;
+    unsigned int VAO, VBO, EBO;
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
     glGenBuffers(1, &EBO);
@@ -235,8 +233,8 @@ int main() {
 
     // Unbind VAO and VBO
     glBindVertexArray(0);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 

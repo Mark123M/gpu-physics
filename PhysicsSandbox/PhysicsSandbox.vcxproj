@@ -132,6 +132,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Fluid.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="old\collider.cpp" />
@@ -142,20 +143,22 @@
     <ClCompile Include="old\springmesh.cpp" />
     <ClCompile Include="old\springmeshcube.cpp" />
     <ClCompile Include="old\util.cpp" />
+    <ClCompile Include="Particle.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
     <ClCompile Include="stb_image.cpp" />
     <ClCompile Include="TextureLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.gitignore" />
-    <None Include="shaders_\FragmentShader.glsl" />
-    <None Include="shaders_\ModelFragmentShader.glsl" />
-    <None Include="shaders_\ModelVertexShader.glsl" />
-    <None Include="shaders_\TextureFragmentShader.glsl" />
-    <None Include="shaders_\TextureVertexShader.glsl" />
-    <None Include="shaders_\VertexShader.glsl" />
+    <None Include="shaders\FragmentShader.glsl" />
+    <None Include="shaders\ModelFragmentShader.glsl" />
+    <None Include="shaders\ModelVertexShader.glsl" />
+    <None Include="shaders\TextureFragmentShader.glsl" />
+    <None Include="shaders\TextureVertexShader.glsl" />
+    <None Include="shaders\VertexShader.glsl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Fluid.h" />
     <ClInclude Include="old\collider.h" />
     <ClInclude Include="old\logger.h" />
     <ClInclude Include="old\object3d.h" />
@@ -164,16 +167,17 @@
     <ClInclude Include="old\springmesh.h" />
     <ClInclude Include="old\springmeshcube.h" />
     <ClInclude Include="old\util.h" />
+    <ClInclude Include="Particle.h" />
     <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="stb_image.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="shaders_\shader_section.txt" />
-    <Text Include="shaders_\texture_section.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <Image Include="textures_\awesomeface.png" />
     <Image Include="textures_\container.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="shaders\shader_section.txt" />
+    <Text Include="shaders\texture_section.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

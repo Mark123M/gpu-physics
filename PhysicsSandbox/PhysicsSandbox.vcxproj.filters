@@ -63,27 +63,33 @@
     <ClCompile Include="old\util.cpp">
       <Filter>Source Files\old</Filter>
     </ClCompile>
+    <ClCompile Include="Fluid.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Particle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.gitignore">
       <Filter>Source Files</Filter>
     </None>
-    <None Include="shaders_\FragmentShader.glsl">
+    <None Include="shaders\FragmentShader.glsl">
       <Filter>Source Files\shaders</Filter>
     </None>
-    <None Include="shaders_\ModelFragmentShader.glsl">
+    <None Include="shaders\ModelFragmentShader.glsl">
       <Filter>Source Files\shaders</Filter>
     </None>
-    <None Include="shaders_\ModelVertexShader.glsl">
+    <None Include="shaders\ModelVertexShader.glsl">
       <Filter>Source Files\shaders</Filter>
     </None>
-    <None Include="shaders_\TextureFragmentShader.glsl">
+    <None Include="shaders\TextureFragmentShader.glsl">
       <Filter>Source Files\shaders</Filter>
     </None>
-    <None Include="shaders_\TextureVertexShader.glsl">
+    <None Include="shaders\TextureVertexShader.glsl">
       <Filter>Source Files\shaders</Filter>
     </None>
-    <None Include="shaders_\VertexShader.glsl">
+    <None Include="shaders\VertexShader.glsl">
       <Filter>Source Files\shaders</Filter>
     </None>
   </ItemGroup>
@@ -118,14 +124,12 @@
     <ClInclude Include="old\util.h">
       <Filter>Source Files\old</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="shaders_\shader_section.txt">
-      <Filter>Source Files\shaders</Filter>
-    </Text>
-    <Text Include="shaders_\texture_section.txt">
-      <Filter>Source Files\shaders</Filter>
-    </Text>
+    <ClInclude Include="Fluid.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures_\awesomeface.png">
@@ -134,5 +138,13 @@
     <Image Include="textures_\container.jpg">
       <Filter>Source Files\textures</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="shaders\shader_section.txt">
+      <Filter>Source Files\shaders</Filter>
+    </Text>
+    <Text Include="shaders\texture_section.txt">
+      <Filter>Source Files\shaders</Filter>
+    </Text>
   </ItemGroup>
 </Project>

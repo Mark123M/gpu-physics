@@ -1,1 +1,10 @@
-﻿  PhysicsSandbox.vcxproj -> C:\Users\User\source\repos\PhysicsSandbox\x64\Debug\PhysicsSandbox.exe
+﻿  Particle.cpp
+  object3d.cpp
+  plane.cpp
+  sphere.cpp
+C:\Users\User\source\repos\PhysicsSandbox\PhysicsSandbox\old\sphere.cpp(64,31): warning C4305: 'argument': truncation from 'double' to 'float'
+  springmesh.cpp
+  springmeshcube.cpp
+  util.cpp
+  Generating Code...
+  PhysicsSandbox.vcxproj -> C:\Users\User\source\repos\PhysicsSandbox\x64\Debug\PhysicsSandbox.exe
