@@ -1,7 +1,8 @@
 #include <glad/glad.h>
 #include <glfw3.h>
 #include <iostream>
-#include "Shader.h"
+//#include "Shader.h"
+#include "ShaderProgram.h"
 #include "stb_image.h"
 
 #include "glm/glm.hpp"
@@ -127,7 +128,7 @@ int main() {
     glfwSetCursorPosCallback(window, mouse_callback);
     glfwSetScrollCallback(window, scroll_callback);
 
-    Shader myShader("./shaders/ModelVertexShader.glsl", "./shaders/ModelFragmentShader.glsl");
+    ShaderProgram myShader("./shaders/ModelVertexShader.glsl", "./shaders/ModelFragmentShader.glsl");
 
     /*
     // Vertex data for VBOs

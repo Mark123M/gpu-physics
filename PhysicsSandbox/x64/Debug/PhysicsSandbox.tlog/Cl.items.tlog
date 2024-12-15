@@ -1,5 +1,13 @@
 C:\Users\User\source\repos\PhysicsSandbox\PhysicsSandbox\glad.c;C:\Users\User\source\repos\PhysicsSandbox\PhysicsSandbox\x64\Debug\glad.obj
 C:\Users\User\source\repos\PhysicsSandbox\PhysicsSandbox\main.cpp;C:\Users\User\source\repos\PhysicsSandbox\PhysicsSandbox\x64\Debug\main.obj
-C:\Users\User\source\repos\PhysicsSandbox\PhysicsSandbox\Shader.cpp;C:\Users\User\source\repos\PhysicsSandbox\PhysicsSandbox\x64\Debug\Shader.obj
+C:\Users\User\source\repos\PhysicsSandbox\PhysicsSandbox\old\collider.cpp;C:\Users\User\source\repos\PhysicsSandbox\PhysicsSandbox\x64\Debug\collider.obj
+C:\Users\User\source\repos\PhysicsSandbox\PhysicsSandbox\old\logger.cpp;C:\Users\User\source\repos\PhysicsSandbox\PhysicsSandbox\x64\Debug\logger.obj
+C:\Users\User\source\repos\PhysicsSandbox\PhysicsSandbox\old\object3d.cpp;C:\Users\User\source\repos\PhysicsSandbox\PhysicsSandbox\x64\Debug\object3d.obj
+C:\Users\User\source\repos\PhysicsSandbox\PhysicsSandbox\old\plane.cpp;C:\Users\User\source\repos\PhysicsSandbox\PhysicsSandbox\x64\Debug\plane.obj
+C:\Users\User\source\repos\PhysicsSandbox\PhysicsSandbox\old\sphere.cpp;C:\Users\User\source\repos\PhysicsSandbox\PhysicsSandbox\x64\Debug\sphere.obj
+C:\Users\User\source\repos\PhysicsSandbox\PhysicsSandbox\old\springmesh.cpp;C:\Users\User\source\repos\PhysicsSandbox\PhysicsSandbox\x64\Debug\springmesh.obj
+C:\Users\User\source\repos\PhysicsSandbox\PhysicsSandbox\old\springmeshcube.cpp;C:\Users\User\source\repos\PhysicsSandbox\PhysicsSandbox\x64\Debug\springmeshcube.obj
+C:\Users\User\source\repos\PhysicsSandbox\PhysicsSandbox\old\util.cpp;C:\Users\User\source\repos\PhysicsSandbox\PhysicsSandbox\x64\Debug\util.obj
+C:\Users\User\source\repos\PhysicsSandbox\PhysicsSandbox\ShaderProgram.cpp;C:\Users\User\source\repos\PhysicsSandbox\PhysicsSandbox\x64\Debug\ShaderProgram.obj
 C:\Users\User\source\repos\PhysicsSandbox\PhysicsSandbox\stb_image.cpp;C:\Users\User\source\repos\PhysicsSandbox\PhysicsSandbox\x64\Debug\stb_image.obj
 C:\Users\User\source\repos\PhysicsSandbox\PhysicsSandbox\TextureLoader.cpp;C:\Users\User\source\repos\PhysicsSandbox\PhysicsSandbox\x64\Debug\TextureLoader.obj

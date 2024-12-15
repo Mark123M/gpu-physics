@@ -1,11 +1,1 @@
-﻿  main.cpp
-C:\Users\User\source\repos\PhysicsSandbox\PhysicsSandbox\main.cpp(63,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\User\source\repos\PhysicsSandbox\PhysicsSandbox\main.cpp(64,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\User\source\repos\PhysicsSandbox\PhysicsSandbox\main.cpp(68,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\User\source\repos\PhysicsSandbox\PhysicsSandbox\main.cpp(69,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\User\source\repos\PhysicsSandbox\PhysicsSandbox\main.cpp(70,13): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\User\source\repos\PhysicsSandbox\PhysicsSandbox\main.cpp(71,13): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\User\source\repos\PhysicsSandbox\PhysicsSandbox\main.cpp(305,28): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\User\source\repos\PhysicsSandbox\PhysicsSandbox\main.cpp(350,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\User\source\repos\PhysicsSandbox\PhysicsSandbox\main.cpp(351,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  PhysicsSandbox.vcxproj -> C:\Users\User\source\repos\PhysicsSandbox\x64\Debug\PhysicsSandbox.exe
+﻿  PhysicsSandbox.vcxproj -> C:\Users\User\source\repos\PhysicsSandbox\x64\Debug\PhysicsSandbox.exe

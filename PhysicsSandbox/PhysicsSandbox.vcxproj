@@ -134,7 +134,15 @@
   <ItemGroup>
     <ClCompile Include="glad.c" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="old\collider.cpp" />
+    <ClCompile Include="old\logger.cpp" />
+    <ClCompile Include="old\object3d.cpp" />
+    <ClCompile Include="old\plane.cpp" />
+    <ClCompile Include="old\sphere.cpp" />
+    <ClCompile Include="old\springmesh.cpp" />
+    <ClCompile Include="old\springmeshcube.cpp" />
+    <ClCompile Include="old\util.cpp" />
+    <ClCompile Include="ShaderProgram.cpp" />
     <ClCompile Include="stb_image.cpp" />
     <ClCompile Include="TextureLoader.cpp" />
   </ItemGroup>
@@ -148,7 +156,15 @@
     <None Include="shaders_\VertexShader.glsl" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Shader.h" />
+    <ClInclude Include="old\collider.h" />
+    <ClInclude Include="old\logger.h" />
+    <ClInclude Include="old\object3d.h" />
+    <ClInclude Include="old\plane.h" />
+    <ClInclude Include="old\sphere.h" />
+    <ClInclude Include="old\springmesh.h" />
+    <ClInclude Include="old\springmeshcube.h" />
+    <ClInclude Include="old\util.h" />
+    <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="stb_image.h" />
   </ItemGroup>
   <ItemGroup>
