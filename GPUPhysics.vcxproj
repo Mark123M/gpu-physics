@@ -87,6 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="exercises\hw1\readme.md" />
+    <None Include="README.md" />
     <None Include="shaders\FragmentShader.glsl" />
     <None Include="shaders\ModelFragmentShader.glsl" />
     <None Include="shaders\ModelVertexShader.glsl" />

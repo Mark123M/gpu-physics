@@ -59,6 +59,7 @@
     <None Include="exercises\hw1\readme.md">
       <Filter>exercises\hw1</Filter>
     </None>
+    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="shaders\shader_section.txt">
