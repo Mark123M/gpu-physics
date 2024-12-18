@@ -79,41 +79,14 @@
     </CudaCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CudaCompile Include="CudaTest.cu" />
-    <CudaCompile Include="kernel.cu" />
+    <CudaCompile Include="exercises\CudaTest.cu" />
+    <CudaCompile Include="exercises\hw1\_hello.cu" />
+    <CudaCompile Include="exercises\hw1\_matrix_mul.cu" />
+    <CudaCompile Include="exercises\hw1\_vector_add.cu" />
+    <CudaCompile Include="exercises\kernel.cu" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="collider.cpp" />
-    <ClCompile Include="Fluid.cpp" />
-    <ClCompile Include="glad.c" />
-    <ClCompile Include="logger.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="object3d.cpp" />
-    <ClCompile Include="Particle.cpp" />
-    <ClCompile Include="plane.cpp" />
-    <ClCompile Include="ShaderProgram.cpp" />
-    <ClCompile Include="sphere.cpp" />
-    <ClCompile Include="springmesh.cpp" />
-    <ClCompile Include="springmeshcube.cpp" />
-    <ClCompile Include="stb_image.cpp" />
-    <ClCompile Include="TextureLoader.cpp" />
-    <ClCompile Include="util.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="collider.h" />
-    <ClInclude Include="Fluid.h" />
-    <ClInclude Include="logger.h" />
-    <ClInclude Include="object3d.h" />
-    <ClInclude Include="Particle.h" />
-    <ClInclude Include="plane.h" />
-    <ClInclude Include="ShaderProgram.h" />
-    <ClInclude Include="sphere.h" />
-    <ClInclude Include="springmesh.h" />
-    <ClInclude Include="springmeshcube.h" />
-    <ClInclude Include="stb_image.h" />
-    <ClInclude Include="util.h" />
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="exercises\hw1\readme.md" />
     <None Include="shaders\FragmentShader.glsl" />
     <None Include="shaders\ModelFragmentShader.glsl" />
     <None Include="shaders\ModelVertexShader.glsl" />
@@ -128,6 +101,41 @@
   <ItemGroup>
     <Image Include="textures\awesomeface.png" />
     <Image Include="textures\container.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="exercises\cudaMain.cpp" />
+    <ClCompile Include="physics\collider.cpp" />
+    <ClCompile Include="physics\Fluid.cpp" />
+    <ClCompile Include="physics\logger.cpp" />
+    <ClCompile Include="physics\object3d.cpp" />
+    <ClCompile Include="physics\Particle.cpp" />
+    <ClCompile Include="physics\plane.cpp" />
+    <ClCompile Include="physics\sphere.cpp" />
+    <ClCompile Include="physics\springmesh.cpp" />
+    <ClCompile Include="physics\springmeshcube.cpp" />
+    <ClCompile Include="physics\util.cpp" />
+    <ClCompile Include="rendering\glad.c" />
+    <ClCompile Include="rendering\main.cpp" />
+    <ClCompile Include="rendering\ShaderProgram.cpp" />
+    <ClCompile Include="rendering\stb_image.cpp" />
+    <ClCompile Include="rendering\TextureLoader.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="exercises\hw1\_hello.cuh" />
+    <ClInclude Include="exercises\hw1\_matrix_mul.cuh" />
+    <ClInclude Include="exercises\hw1\_vector_add.cuh" />
+    <ClInclude Include="physics\collider.h" />
+    <ClInclude Include="physics\Fluid.h" />
+    <ClInclude Include="physics\logger.h" />
+    <ClInclude Include="physics\object3d.h" />
+    <ClInclude Include="physics\Particle.h" />
+    <ClInclude Include="physics\plane.h" />
+    <ClInclude Include="physics\sphere.h" />
+    <ClInclude Include="physics\springmesh.h" />
+    <ClInclude Include="physics\springmeshcube.h" />
+    <ClInclude Include="physics\util.h" />
+    <ClInclude Include="rendering\ShaderProgram.h" />
+    <ClInclude Include="rendering\stb_image.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

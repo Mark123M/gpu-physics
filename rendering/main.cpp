@@ -98,7 +98,7 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
         fov = 90.0f;
 }
 
-int notmain() {
+int rendermain() {
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);

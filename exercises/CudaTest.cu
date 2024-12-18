@@ -26,7 +26,7 @@ __global__ void add(int* a, int* b, int* c) {
 }
 
 #define N 512
-int main(void) {
+int notmain(void) {
 	int* a, * b, * c; // host copies of a, b, c
 	int* d_a, * d_b, * d_c; // device copies of a, b, c
 	int size = N * sizeof(int);
@@ -58,6 +58,12 @@ int main(void) {
 	cudaFree(d_a);
 	cudaFree(d_b);
 	cudaFree(d_c);
+
+	// Supports C++ 2014, but no std:: library features
+	// Can copy user-defined objects to the GPU kernels and use it there
+	// Pass objects by value to cuda kernel
+	// Copying data cudaMemcpy() through PCIE bus (high speed). Could be a bottleneck still
+	// MINIMIZE DATA TRANSFER BETWEEN HOST AND DEVICE
 	return 0;
 
 }
